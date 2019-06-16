@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %} uSense Information {% endblock %}
+
+{% block content %}
+
+<div id="section2" class="container-fluid usense-height information">
+<div class="container section-padding">
+    <h1 class="heading"><span class="heading-before">Information</span></h1>
+    <div>
+       <div class="chip-tags">
+        <span>Keywords of this section:</span>
+        <div class="chip">tanácsadásnak</div>
+        <div class="chip">befektetés</div>
+        <div class="chip">információ</div>
+       </div> 
+    </div>
+
+    <input class="form-control input-search" id="information_js" type="text" placeholder="Search..">
+    <ul class="list-group" id="information_js">
+        {% for story in information_list %}
+            <li class="list-group-item"> 
+                <div class="heading-panel" data-toggle="collapse" data-target="#information-{{ loop.index }}">
+                .:. {{ story.description | truncate(50) }}
+                <i class="more-less glyphicon glyphicon-plus"></i>
+                </div>
+                <div id="information-{{ loop.index }}" class="collapse out">
+                    <div class="body-panel">
+                        <p>  {{ story.description | truncate(300) }} </p>
+                        <a href="{{ story.link }}" target="_blank"> see the website </a>                                
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>            
+</div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#information_js").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#information_js li").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+{% endblock %}

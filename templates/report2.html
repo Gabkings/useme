@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %} uSense Report2 {% endblock %}
+
+{% block content %}
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <div id="report2" class="reports container-fluid usense-height">
+    <div class="container section-padding">
+        <h1 class="heading"><span class="heading-before">Distribution of users</span>
+        </h1>
+        <div id="pie_chart"></div>
+        <br>
+        <p>A szakterületek eloszlása mutatja, mennyire foglalkoztatja adott típusú vezetőket a 
+            munkaerő mobilitás.</p>
+    </div>
+    <script type="text/javascript">
+
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                {% for row in report_data %}
+                    ['{{ row.task }}', {{ row.hour }}],
+                {% endfor %}
+            ]);
+
+            var options = {
+                title: 'Milyen típusű vezetők érdeklődnek?',
+                fontSize: 18
+
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
+
+            chart.draw(data, options);
+        }
+        $(window).on('resizeEnd', function () {
+                if ($('#pie_chart').length) {
+                    legend: { position: 'none' }
+                    drawChart();
+                }
+
+        });        
+        //create trigger to resizeEnd event     
+        $(window).resize(function () {
+            if (this.resizeTO) clearTimeout(this.resizeTO);
+            this.resizeTO = setTimeout(function () {
+                $(this).trigger('resizeEnd');
+            }, 500);
+        });        
+    </script>
+    </div>
+{% endblock %}

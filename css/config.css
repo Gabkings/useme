@@ -1,0 +1,86 @@
+/*======== Common CSS =========*/
+.navbar-inverse {
+    background-color: #072642;
+}
+.navbar-inverse .navbar-nav>.active>a,
+.navbar-inverse .navbar-nav>.active>a:focus,
+.navbar-inverse .navbar-nav>.active>a:hover,
+.navbar-inverse .navbar-nav>li:hover a {
+    background: #212121;
+}
+.navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+.navbar-inverse .navbar-nav > li > a.usense-green{
+    color: #69ed44;
+}
+.navbar-inverse .navbar-nav > li > a.usense-orange{
+    color: orange;
+}
+
+.heading-panel[aria-expanded="true"]{
+    background-color: #31708f;
+}
+.chip{
+	background-color: #337ab7;
+}
+input[type=submit]{
+	background-color: #fba52f;
+}
+input[type=submit]:hover{
+    background-color: #ffa529;
+}
+#demo{
+    color:blue;
+}
+#error{
+    color:red;
+}
+#success-msg {
+    color: #69ed44
+}
+.heading-before::before{
+	background: orange;   
+}
+#loading .fa-spin{
+	color: red;
+}
+/*======== ABOUT US PAGE CSS=========*/
+
+.about-us .container-fluid{
+    background:#212121e0;   
+}
+.about-us .subheading{
+    color: #fdb831;
+}
+/*======== INFORMATION PAGE CSS=========*/
+.information{
+	background-color: #3817a5;
+}
+
+/*======== MOTIVATION PAGE CSS=========*/
+.motivation{
+	background-color: #106499;
+}
+
+/*======== REPORT 1 CSS =========*/
+
+#report1 {
+    background-color: #072642e6;
+}
+
+/*======== REPORT 2 CSS =========*/
+
+#report2 {
+    background-color: #072642e6;
+}
+/*======== PROFILE PAGE CSS=========*/
+.digitalization,
+.usense-profile{
+	background-color: #072642e6;	
+}
+.usense-profile .errors{
+    background: red;
+}
+

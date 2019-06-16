@@ -1,0 +1,4 @@
+wtforms
+webapp2==2.0.1
+google-appengine==1.6.1
+-e git@github.com:moraes/appengine-ndb-experiment.git#egg=ndb

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %} uSense Report1 {% endblock %}
+
+{% block content %}
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <div id="report1" class="reports container-fluid usense-height">
+        <div class="container section-padding">
+            <h1 class="heading"><span class="heading-before">Toplist of words</span></h1>
+            <div id="chart_div1"></div>
+            <br>
+            <p>A területek nagysága a gyakoriságra utal.</p>
+            <p>A területek színe a növekvő / csökkenő trendet jelenti.</p>            
+        </div>        
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['treemap'] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Location', 'Parent', 'Market trade volume (size)', 'Market increase/decrease (color)'],
+                {% for report in report_data %}
+                    [
+                    '{{ report.location}}',
+                        {% if report.parent != 'null' %} 
+                            '{{ report.parent}}'
+                        {% else %}
+                            {{ report.parent}}
+                        {% endif%},
+                        {{ report.size}},
+                        {{ report.color}}
+                    ],
+                {% endfor %}
+
+                ]);
+            tree = new google.visualization.TreeMap(document.getElementById('chart_div1'));
+            tree.draw(data, {
+                minColor: '#f00',
+                midColor: '#ddd',
+                maxColor: '#0d0',
+                headerHeight: 40,
+                fontColor: 'black',
+                showScale: true,
+                fontSize: 16,
+                textTransform: 'capitalize'
+            });
+        }
+
+        $(window).on('resizeEnd', function () {
+                if ($('#chart_div1').length) {
+                    legend: { position: 'none' }
+                    drawChart();
+                }
+
+        });
+        //create trigger to resizeEnd event     
+        $(window).resize(function () {
+            if (this.resizeTO) clearTimeout(this.resizeTO);
+            this.resizeTO = setTimeout(function () {
+                $(this).trigger('resizeEnd');
+            }, 500);
+        });        
+    </script>
+    </div>
+{% endblock %}

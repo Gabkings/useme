@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %} uSense Motivation {% endblock %}
+
+{% block content %}
+
+<div id="section3" class="container-fluid usense-height motivation">
+<div class="container section-padding">
+    <h1 class="heading"><span class="heading-before">Motivation</span></h1>
+    <div>
+       <div class="chip-tags">
+        <span>Keywords of this section:</span>
+        <div class="chip">képességek</div>
+        <div class="chip">kreativitás</div>
+        <div class="chip">növekedés</div>
+       </div> 
+    </div>
+
+    <input class="form-control input-search" id="motivation_js" type="text" placeholder="Search..">
+    <ul class="list-group" id="motivation_js">
+        {% for story in motivation_list %}
+            <li class="list-group-item"> 
+                <div class="heading-panel" data-toggle="collapse" data-target="#motivation-{{ loop.index }}">
+                .:. {{ story.description | truncate (50) }}
+                <i class="more-less glyphicon glyphicon-plus"></i>
+                </div>
+                <div id="motivation-{{ loop.index }}" class="collapse out">
+                    <div class="body-panel">
+                        <p>  {{ story.description }} truncate(300) </p>
+                        <a href="{{ story.link }}" target="_blank"> see the website </a>                                
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>            
+</div>
+</div>
+<script>
+        $(document).ready(function () {
+            $("#motivation_js").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#motivation_js li").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+</script>
+{% endblock %}

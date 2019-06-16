@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %} uSense Digitalization {% endblock %}
+{% block content %}
+<div id="section1" class="container-fluid usense-height digitalization">
+    <div class="container section-padding">
+        <h1 class="heading"><span class="heading-before">Digitalization</span></h1>
+        <div>
+           <div class="chip-tags">
+            <span>Keywords of this section:</span>
+            <div class="chip">digitális</div>
+            <div class="chip">lehetőség</div>
+            <div class="chip">szakmaiság</div>
+           </div> 
+        </div>
+
+        <input class="form-control input-search" id="digitalization_js" type="text" placeholder="Search..">
+        <ul class="list-group" id="digitalization_js">
+
+            {% for story in digitalization_list %}
+                <li class="list-group-item"> 
+                    <div class="heading-panel" data-toggle="collapse" data-target="#digital-{{ loop.index }}">
+                    .:. {{ story.description | truncate (50) }}
+                    <i class="more-less glyphicon glyphicon-plus"></i>
+                    </div>
+                    <div id="digital-{{ loop.index }}" class="collapse out">
+                        <div class="body-panel">
+                            <p>  {{ story.description | truncate (300) }}  </p>
+                            <a href="{{ story.link }}" target="_blank"> see the website </a>                                
+                        </div>
+                    </div>
+                </li>
+
+            {% endfor %}
+        </ul>            
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#digitalization_js").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#digitalization_js li").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+{% endblock %}
